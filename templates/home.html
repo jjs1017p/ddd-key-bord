@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레이저 키보드 사기</title>
+    <style>
+        body {
+            background-image: url('/static/keybord.jpg'); /* 배경 이미지 설정 */
+            background-size: cover; /* 배경 이미지가 화면 전체를 덮도록 설정 */
+            background-position: center; /* 배경 이미지가 화면 중앙에 위치하도록 설정 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+            color: #ffffff; /* 기본 텍스트 색상 설정 */
+            margin: 0; /* 기본 여백 제거 */
+            padding: 0; /* 기본 패딩 제거 */
+        }
+
+        .header {
+            display: flex; /* Flexbox 레이아웃 사용 */
+            align-items: center; /* 수직 정렬 */
+            justify-content: center; /* 수평 정렬 */
+            margin-top: 20px; /* 상단 여백 */
+        }
+
+        .header img {
+            height: 50px; /* 이미지 높이 설정 */
+            margin-right: 10px; /* 이미지와 제목 사이의 여백 */
+        }
+
+        .header h1 {
+            font-size: 48px; /* 제목 글씨 크기 설정 */
+            margin: 0; /* 기본 여백 제거 */
+            color: white; /* 기본 글자 색상 설정 */
+            position: relative; /* 위치를 상대적으로 설정 */
+            display: inline-block; /* 블록 요소로 만들기 */
+            transition: text-shadow 0.5s ease; /* 텍스트 그림자 전환 효과 */
+        }
+
+        .info {
+            margin-top: 20px; /* 상단 여백 */
+            font-size: 24px; /* 글씨 크기 설정 */
+        }
+
+        .info p {
+            margin: 10px 0; /* 상하 여백 */
+        }
+
+        .timer {
+            font-size: 28px; /* 타이머 글씨 크기 설정 */
+            color: yellow; /* 타이머 글씨 색상 설정 */
+        }
+
+        .video-container {
+            margin-top: 20px; /* 상단 여백 */
+        }
+
+        .video-container a {
+            font-size: 24px; /* 링크 텍스트 크기 설정 */
+            color: #ff0000; /* 링크 색상 설정 */
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
+
+        .video-container a:hover {
+            text-decoration: underline; /* 링크에 마우스를 올렸을 때 밑줄 추가 */
+        }
+
+        .purchase-section {
+            margin-top: 40px; /* 상단 여백 */
+            font-size: 24px; /* 제목 글씨 크기 설정 */
+            color: #ffffff; /* 텍스트 색상 설정 */
+        }
+
+        .purchase-button {
+            display: inline-block; /* 인라인 블록으로 설정 */
+            padding: 15px 30px; /* 버튼 패딩 설정 */
+            font-size: 20px; /* 버튼 텍스트 크기 설정 */
+            color: #ffffff; /* 버튼 텍스트 색상 설정 */
+            background-color: #007bff; /* 버튼 배경색 설정 */
+            border: none; /* 테두리 제거 */
+            border-radius: 5px; /* 둥근 모서리 설정 */
+            cursor: pointer; /* 커서 포인터로 설정 */
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
+
+        .purchase-button:hover {
+            background-color: #0056b3; /* 버튼 호버 시 배경색 변경 */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/static/razer.png" alt="로고"> <!-- 제목 앞에 표시할 이미지 -->
+        <h1 id="dynamicTitle">레이저 키보드 사기</h1>
+    </div>
+    <div class="info">
+        <p class="timer" id="countdown"></p> <!-- 타이머를 표시할 영역 -->
+        <p>목표 금액: 325,600원</p> <!-- 목표 금액 업데이트 -->
+        <p>지금 모은 금액: <span id="currentAmount">0</span>원</p>
+        <p>3년 2개월 6일만 기다리면 살수있음</p>
+        <p>레이저 블랙위도우 V4 Pro 325,600원</p> <!-- 추가된 정보 업데이트 -->
+    </div>
+
+    <div class="video-container">
+        <!-- YouTube 링크 삽입 -->
+        <p><a href="https://www.youtube.com/watch?v=T6axDYPRXn4" target="_blank">YouTube에서리뷰 동영상 보기</a></p>
+    </div>
+
+    <div class="purchase-section">
+        <h2>구매:공식 레이저</h2>
+        <a href="https://www.razer.com/kr-kr/gaming-keyboards/Razer-BlackWidow-V4-Pro/RZ03-04681500-R3K1" class="purchase-button" target="_blank">지금 구매하기</a>
+    </div>
+
+    <script>
+        // 색상 배열 설정
+        const colors = [
+            'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'
+        ];
+
+        // 색상 변화를 적용하는 함수
+        function changeTextShadow() {
+            const title = document.getElementById('dynamicTitle');
+            const index = Math.floor((Date.now() / 2000) % colors.length);
+            const color = colors[index];
+
+            title.style.textShadow = `
+                1px 1px 0 ${color},
+                2px 2px 0 ${colors[(index + 1) % colors.length]},
+                3px 3px 0 ${colors[(index + 2) % colors.length]},
+                4px 4px 0 ${colors[(index + 3) % colors.length]},
+                5px 5px 0 ${colors[(index + 4) % colors.length]},
+                6px 6px 0 ${colors[(index + 5) % colors.length]},
+                7px 7px 0 ${colors[(index + 6) % colors.length]},
+                -1px -1px 0 ${color},
+                -2px -2px 0 ${colors[(index + 1) % colors.length]},
+                -3px -3px 0 ${colors[(index + 2) % colors.length]},
+                -4px -4px 0 ${colors[(index + 3) % colors.length]},
+                -5px -5px 0 ${colors[(index + 4) % colors.length]},
+                -6px -6px 0 ${colors[(index + 5) % colors.length]},
+                -7px -7px 0 ${colors[(index + 6) % colors.length]}
+            `;
+        }
+
+        // 타이머와 모은 금액 업데이트 함수
+        const startDate = new Date('2024-08-11T07:43:00'); // 시작 시간 설정
+        const endDate = new Date(startDate.getTime());
+        endDate.setFullYear(endDate.getFullYear() + 3, endDate.getMonth() + 2, endDate.getDate() + 6); // 3년 2개월 6일 후
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeLeft = endDate - now;
+
+            if (timeLeft <= 0) {
+                document.getElementById('countdown').innerHTML = "타이머가 종료되었습니다.";
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML =
+                `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+        }
+
+        // 현재 모은 금액 설정
+        const goalAmount = 325600; // 목표 금액 업데이트
+        let collectedAmount = 2000; // 초기 모은 금액 설정
+        const weeklyIncrease = 2000; // 매주 추가되는 금액
+        const weekInMillis = 1000 * 60 * 60 * 24 * 7; // 일주일의 밀리초
+
+        function updateAmount() {
+            const now = new Date();
+            const weeksPassed = Math.floor((now - new Date('2024-08-12T00:00:00')) / weekInMillis);
+            collectedAmount = 2000 + weeksPassed * weeklyIncrease;
+            document.getElementById('currentAmount').innerHTML = collectedAmount.toLocaleString();
+        }
+
+        setInterval(changeTextShadow, 2000); // 2초마다 색상 변경
+        updateCountdown();
+        updateAmount();
+        setInterval(updateCountdown, 1000); // 타이머 업데이트를 1초마다 실행
+    </script>
+</body>
+</html>
